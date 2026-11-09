@@ -10,8 +10,8 @@ setup
   const activeId = items.find(tab => tab.href !== '/' && path.replace(/\/$/, '') === tab.href)?.id ?? ''
 
 div(className='h-160 grid grid-cols-7')
-  div(className='col-span-2 bg-foreground/1 h-full p-6 border-r border-[#666] dark:border-[#333] border-dotted rounded-[2.5rem] bg-foreground/4')
-    h2(className='uppercase text-xs font-mono tracking-widest p-2 opacity-70 border-b border-dotted') Actions
+  div(className='col-span-2 bg-foreground/1 h-full p-6 border-r border-[#666] dark:border-[#333] border-dotted rounded-[2.5rem] bg-foreground/4 shadow-xs')
+    h2(className='uppercase text-xs font-mono tracking-widest p-2 opacity-70 border-b border-dotted border-foreground/36 mb-2') Actions
     div(className='size-full')
       ActionTabs(items={items} activeId={activeId})
   div(className='col-span-5')
