@@ -1,0 +1,43 @@
+{
+  "name": "todo",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsrx-tsc --noEmit",
+    "check": "bun run typecheck && bun run build",
+    "icons:build": "bun scripts/build-icons.ts --svg src/lib/icons/svg --out src/lib/icons/icons.ts",
+    "icons:check": "bun scripts/build-icons.ts --svg src/lib/icons/svg --out src/lib/icons/icons.ts --check"
+  },
+  "dependencies": {
+    "@earendil-works/chord": "^1.5.0",
+    "@earendil-works/pi-ai": "^1.5.0",
+    "@earendil-works/pi-durable": "^1.5.0",
+    "@octanejs/base-ui": "0.1.69",
+    "@octanejs/effect-atom": "^0.0.1",
+    "@octanejs/tanstack-router": "^0.3.2",
+    "beast-tsrx": "0.16.0",
+    "clsx": "^2.1.1",
+    "effect": "^4.1.2",
+    "octane": "0.16.0",
+    "tailwind-merge": "^3.6.0",
+    "three": "^0.187.0"
+  },
+  "devDependencies": {
+    "@beastjs/cli": "0.4.0",
+    "@beastjs/devtools": "0.1.23",
+    "@beastjs/page-builder": "0.3.0",
+    "@tailwindcss/vite": "^4.3.5",
+    "@tsrx/oxc": "0.24.0",
+    "@tsrx/typescript-plugin": "0.6.3",
+    "@types/node": "^26.2.0",
+    "@types/three": "^0.187.0",
+    "svgo": "^4.1.0",
+    "tailwindcss": "^4.3.5",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.7"
+  }
+}

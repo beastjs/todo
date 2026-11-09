@@ -1,0 +1,17 @@
+
+import Tabs from '@/components/ui/Tabs.btsx'
+import type { IconName } from '@/lib/icons'
+
+module
+  export interface TabItem {
+    href: string
+    id: string
+    label: string
+    shortLabel: string
+    icon: IconName
+  }
+
+props { activeId, items, label = 'Tabs' }: { activeId: string; items: readonly TabItem[]; label?: string }
+
+div
+  Tabs(activeId={activeId} items={items} label={label})

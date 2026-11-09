@@ -1,0 +1,28 @@
+import MetallicPaint from "@/components/bits/MetallicPaint.btsx";
+import { ThemeToggle } from "@/components/app/ThemeProvider.btsx";
+import logo from '../../../src/logo.svg'
+import { Link } from "@octanejs/tanstack-router";
+
+div(className='flex items-center justify-between w-full bg-transparent h-24')
+  Link(to='/' className='flex items-center justify-center bg-transparent relative')
+    div(style={{ width: 56, height: 56, position: 'absolute', backgroundColor: 'transparent', zIndex: 0, rotate: '-60deg' }})
+      MetallicPaint(
+        // ~ text="Liquid"
+        // ~ color="#f2c46b"
+        ~ edgeBend={0.9}
+        ~ color="#ffffff"
+        ~ density={2}
+        ~ softness={0.1}
+        ~ dispersion={0.3}
+        ~ distortion={0.07}
+        // ~ edgeBend={0.6}
+        ~ angle={70}
+        ~ scale={0.6}
+        ~ speed={1}
+        ~ rotation={0}
+        ~ mouseTilt={0.5}
+        ~ intro
+        ~ imageSrc={logo}
+        ~ )
+    h1(className='relative font-[450] translate-x-24 underline underline-offset-8 decoration-1 decoration-foreground/60') Smart Todos
+  ThemeToggle

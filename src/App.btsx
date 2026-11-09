@@ -1,0 +1,13 @@
+import AppHeader from "@/components/app/AppHeader.btsx";
+import GlowWrapper from "@/components/app/GlowWrapper.btsx";
+import Dashboard from "./components/app/Dashboard.btsx";
+import AppShell from "./components/app/AppShell.btsx";
+
+props {}:{}
+
+
+AppShell
+  AppHeader
+  main(className='h-[calc(100dvh-96px)]')
+    GlowWrapper
+      Dashboard

@@ -1,0 +1,8 @@
+
+import type { OctaneNode } from "octane";
+import ThemeProvider from "./ThemeProvider.btsx";
+
+props {children}: {children: OctaneNode}
+div(className='max-w-7xl mx-auto h-full')
+  ThemeProvider
+    fragment #{children}

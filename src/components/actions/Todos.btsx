@@ -1,0 +1,36 @@
+import { useTodoActions, useVisibleTodos, useTodoQuery, type Todo } from "@/lib/store";
+setup
+  const todos: Todo[] = useVisibleTodos();
+  const actions = useTodoActions();
+  const query = useTodoQuery();
+div(className='size-full px-10 py-4 space-y-4')
+  div(className='flex items-center justify-between')
+    h2(className='font-[500] text-lg') Todos
+    input(
+      ~ value={query.search}
+      ~ placeholder="Search tasks..."
+      ~ onInput={(event) => actions.setSearch(event.currentTarget.value)}
+      ~ )
+  nav(className='space-x-3 w-full text-sm text-foreground/70')
+    button(onClick={() => actions.setFilter("all")}) All
+    button(onClick={() => actions.setFilter("active")}) Active
+    button(onClick={() => actions.setFilter("completed")}) Completed
+    button(onClick={() => actions.setFilter("overdue")}) Overdue
+
+  ul(className='flex-1 h-140')
+    each todo in todos key todo.id
+      li(className='flex items-center justify-between w-full')
+        div(className='flex items-center space-x-3')
+          input(
+            ~ type="checkbox"
+            ~ checked={todo.status === "completed"}
+            ~ onChange={() => actions.toggle(todo.id)}
+            ~ )
+          span #{todo.title}
+        div(className='flex items-center space-x-3')
+
+          button(onClick={() => actions.archive(todo.id)}) Archive
+          button(onClick={() => actions.remove(todo.id)}) Delete
+  footer(className='space-x-3 text-sm text-foreground/50')
+    button(onClick={actions.undo}) Undo
+    button(onClick={actions.redo}) Redo

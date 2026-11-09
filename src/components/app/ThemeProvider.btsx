@@ -1,0 +1,47 @@
+import { useEffect, useState } from 'octane'
+import { ThemeContext, useTheme, type ThemeContextValue } from '@/lib/theme-context'
+import type { ReactNode } from 'octane'
+import { applyTheme, getPreferredTheme, saveTheme } from '@/lib/theme'
+import type { Theme } from '@/lib/theme'
+import {Icon} from "@/lib/icons";
+
+
+component ThemeToggle
+  setup
+    const { theme, toggleTheme } = useTheme()
+    const nextTheme = theme === 'dark' ? 'light' : 'dark'
+    const title = `Switch to ${nextTheme} theme`
+
+  button(
+    ~ type='button'
+    ~ className='inline-flex size-7 cursor-pointer items-center justify-center rounded-full hover:bg-foreground/20 text-foreground/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/30 active:scale-98 transition-all duration-180 ease-out'
+    ~ onClick={toggleTheme}
+    ~ aria-label='Dark theme'
+    ~ aria-pressed={theme === 'dark'}
+    ~ title={title}
+    ~ )
+    Icon(name='theme' className='size-5.5 md:size-4.5')
+
+module
+  interface ThemeProviderProps {
+    children?: ReactNode
+  }
+
+  export { ThemeToggle }
+  export { useTheme } from '@/lib/theme-context'
+
+props { children }: ThemeProviderProps
+
+setup
+  const [theme, setThemeState] = useState<Theme>(getPreferredTheme)
+  const setTheme = (nextTheme: Theme) => {
+    setThemeState(nextTheme)
+    saveTheme(nextTheme)
+  }
+  const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark')
+  const value: ThemeContextValue = { theme, setTheme, toggleTheme }
+
+  useEffect(() => applyTheme(theme), [theme])
+
+ThemeContext(value={value})
+  div(className="size-screen overflow-hidden") #{children}

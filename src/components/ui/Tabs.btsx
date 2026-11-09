@@ -1,0 +1,52 @@
+import type { JSX } from 'octane/jsx-runtime'
+import type { IconName } from '@/lib/icons'
+import { cn } from '@/lib/utils'
+import { createLink } from '@octanejs/tanstack-router'
+
+module
+  export interface TabItem {
+    href: string
+    id: string
+    label: string
+    shortLabel: string
+    icon: IconName
+  }
+
+  type NativeNavProps = JSX.IntrinsicElements['nav']
+
+  type Props = Omit<NativeNavProps, 'aria-label' | 'children' | 'class' | 'className'> & {
+    activeId: string
+    className?: NativeNavProps['className']
+    items: readonly TabItem[]
+    label?: string
+  }
+
+component TabAnchor
+  props { selected, children, ...anchorProps }: JSX.IntrinsicElements['a'] & { selected: boolean }
+  a({...anchorProps} aria-current={selected ? 'page' : undefined} data-tab-active={selected ? '' : undefined})
+    | #{children}
+
+module
+  const TabLink = createLink(TabAnchor)
+
+props { activeId, className, items, label = 'Tabs', ref, ...navProps }: Props
+
+nav(
+  ~ {...navProps}
+  ~ ref={ref}
+  ~ className={cn('flex flex-col space-y-6 py-4', className)}
+  ~ aria-label={label}
+  ~ )
+  each item in items key item.id
+    TabLink(
+      ~ to={item.href.startsWith('#') ? '.' : item.href}
+      ~ hash={item.href.startsWith('#') ? item.href.slice(1) : undefined}
+      ~ selected={activeId === item.id}
+      ~ aria-label={item.label}
+      ~ activeProps={{}}
+      ~ className={cn('builder-tab relative z-30 px-4 py-2 rounded-md text-[0.8rem] font-mono! font-[500] cursor-pointer transition-all duration-180 ease-out', {' bg-[#0a0a0a]! text-white ': activeId === item.id})}
+      ~ )
+      | #{item.label}
+
+style
+  .builder-tabs { display: flex; gap: 24px;}

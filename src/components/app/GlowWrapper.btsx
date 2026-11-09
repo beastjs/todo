@@ -1,0 +1,30 @@
+
+import GlowCursor from "@/components/bits/GlowCursor.btsx";
+import { type OctaneNode, useState } from "octane";
+
+props {children}: {children: OctaneNode}
+setup
+  const [color, setColor] = useState<string>("#7bf1a8")
+  const [intensity, setIntensity] = useState<number>(0.1)
+  const [linger, setLinger] = useState<number>(0.18)
+  const handleMouseDown = () => {
+    void setColor('#419cff')
+    void setIntensity(0.5)
+    void setLinger(1)
+    setTimeout(() => setLinger(0.18), 1000)
+  }
+  const handleMouseUp = () => {
+    void setColor('#7bf1a8')
+    void setIntensity(0.1)
+  }
+div(style={{ width: "100%", height: "1000px", zIndex: 100 }} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp})
+  GlowCursor(
+    ~ color={color}
+    ~ linger={linger}
+    ~ intensity={intensity}
+    ~ trailWidth={0.28}
+    ~ glow={0.4}
+    ~ clickBurst
+    ~ theme="dark"
+    ~ )
+    | #{children}

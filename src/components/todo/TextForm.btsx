@@ -1,0 +1,31 @@
+import { useTodoActions, useTodoStats } from "@/lib/store";
+import { useRef } from "octane";
+setup
+  const actions = useTodoActions();
+  const stats = useTodoStats();
+  const inputRef = useRef<HTMLInputElement | null>(null)
+  const handleSubmit = (event: SubmitEvent) => {
+    event.preventDefault();
+    if (inputRef.current && inputRef.current.value.trim() === ''){
+
+      return
+    }
+    const form = event.currentTarget as HTMLFormElement;
+    const data = new FormData(form)
+    const title = String(data.get("title") ?? "");
+    actions.create({ title });
+    form.reset();
+  }
+main(className='px-10 py-4')
+  header(className='flex items-center justify-between')
+    h1() Type in todos
+    div(className='flex items-center justify-center space-x-3')
+      p #{stats.active} remaining
+      p #{stats.completionRate}% completed
+  form(
+    ~ onSubmit={handleSubmit}
+    ~ className='py-6'
+    ~ )
+    input(ref={inputRef} name="title" placeholder="Add a todos..." className='h-12 border border-foreground/30 w-full rounded-md px-4')
+    div(className='flex items-center justify-end py-3')
+      button(disabled={false} type="submit" className=' px-5 py-3 rounded-lg border border-[#0a0a0a] bg-[#0a0a0a] text-white dark:bg-[#f0f0f0] dark:text-[#0a0a0a] text-[0.8rem] font-mono! font-[500] cursor-pointer transition-all duration-180 ease-out disabled:opacity-40') Add todo

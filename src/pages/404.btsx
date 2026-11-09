@@ -1,0 +1,30 @@
+import { Link } from '@octanejs/tanstack-router'
+import { Icon } from '@/lib/icons'
+
+section(className='relative flex min-h-[calc(100dvh-3rem)] w-full items-center justify-center overflow-hidden px-6 py-16 md:min-h-full' aria-labelledby='not-found-title')
+  div(className='pointer-events-none absolute inset-0 flex items-center justify-center' aria-hidden='true')
+    div(className='size-80 rounded-full bg-primary/5 blur-3xl')
+  div(className='relative w-full max-w-lg text-center')
+    div(className='relative mx-auto mb-8 flex h-40 items-center justify-center sm:h-48' aria-hidden='true')
+      span(className='select-none font-mono text-[8rem] font-medium leading-none tracking-[-0.08em] text-foreground/2 sm:text-[10rem]') 404
+    p(className='mb-3 font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground') Well done human!
+    h1#not-found-title(className='text-3xl font-semibold tracking-tight text-foreground sm:text-3xl') are you trying to exit the matrix?
+    p(className='mx-auto mt-4 max-w-md text-muted-foreground text-base leading-6') Sadly, this is not the right door. Try another and best of luck!
+    Link(to='/' className='mx-auto mt-8 inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-primary px-5 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background')
+      Icon(name='close' size={16})
+      span Back to home
+    div(className='hidden mt-12 border-t border-border/60 pt-6')
+      p(className='mb-4 text-xs text-muted-foreground') Or pick up where you left off
+      div(className='grid gap-3 sm:grid-cols-2')
+        Link(to='/' className='group flex min-w-0 items-center gap-3 rounded-xl border border-border/60 bg-background/60 p-4 text-left transition-colors hover:border-border hover:bg-secondary/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring')
+          Icon(name='search' size={20} className='shrink-0 text-muted-foreground')
+          div(className='min-w-0 flex-1')
+            p(className='text-sm font-medium text-foreground') Projects
+            p(className='mt-1 text-xs text-muted-foreground') Return to your work
+          Icon(name='arrow-right' size={16} className='shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1 motion-reduce:transition-none')
+        Link(to='/' className='group flex min-w-0 items-center gap-3 rounded-xl border border-border/60 bg-background/60 p-4 text-left transition-colors hover:border-border hover:bg-secondary/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring')
+          Icon(name='search' size={20} className='shrink-0 text-muted-foreground')
+          div(className='min-w-0 flex-1')
+            p(className='text-sm font-medium text-foreground') Deck Builder
+            p(className='mt-1 text-xs text-muted-foreground') Make something new
+          Icon(name='arrow-right' size={16} className='shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1 motion-reduce:transition-none')
